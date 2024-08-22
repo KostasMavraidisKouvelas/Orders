@@ -12,11 +12,19 @@ namespace Orders.Api.Controllers
         {
             operations = _operations;
         }
+
+        [HttpGet]
+        public async Task<IActionResult> GetProducts()
+        {
+            var products = await _operations.GetProductsAsync();
+            return Ok(products);
+        }
+
         [HttpPost]
         [Route("Import")]
         public async Task<IActionResult> ImportProducts()
         {
-            await _operations.ImportProducts();
+            await _operations.ImportProductsAsync();
             return Ok();
         }
     }

@@ -19,7 +19,7 @@ builder.Services.AddSwaggerGen();
 var connection = builder.Configuration                //#C
     .GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<OrdersDbContext>(
-    options => options.UseSqlServer(connection, b => b.MigrationsAssembly("ProfessionFinder.DataAccess"))); //#D
+    options => options.UseSqlServer(connection, b => b.MigrationsAssembly("Orders.DataAccess"))); //#D
 builder.Services.Configure<JWTConfig>(configuration.GetSection("JWTConfig"));
 builder.Services.AddAuthentication(options =>
     {

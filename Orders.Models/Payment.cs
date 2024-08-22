@@ -16,7 +16,7 @@ namespace Orders.Models
         public int Amount { get; set; }
         public bool IsProcessed { get; set; }
         public string Invoice { get; set; }
-        public Guid OrderId { get; set; }
+        public int OrderId { get; set; }
         public virtual Order Order { get; set; }
         
     }

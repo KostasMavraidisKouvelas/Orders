@@ -5,18 +5,18 @@ namespace Orders.Models
     public class Product
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int id { get; set; }
-        public string title { get; set; }
-        public double price { get; set; }
-        public string description { get; set; }
-        public string category { get; set; }
-        public string image { get; set; }
-        public Rating rating { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public double Price { get; set; }
+        public string Description { get; set; }
+        public string Category { get; set; }
+        public string Image { get; set; }
+        public Rating Rating { get; set; }
     }
 
     public class Rating
     {
-        public double rate { get; set; }
-        public int count { get; set; }
+        public double Rate { get; set; }
+        public int Count { get; set; }
     }
 }

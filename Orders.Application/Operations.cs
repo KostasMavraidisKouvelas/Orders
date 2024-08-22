@@ -1,4 +1,5 @@
 ﻿using System.Runtime.CompilerServices;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
 using Newtonsoft.Json;
@@ -19,7 +20,7 @@ namespace Orders.Application
             _configuration = configuration;
         }
 
-        public async Task ImportProducts()
+        public async Task ImportProductsAsync()
         {
             try
             {
@@ -36,6 +37,18 @@ namespace Orders.Application
                         // Save products to database
                     }
                 }
+            }
+            catch
+            {
+                throw; // Log exception
+            }
+        }
+
+        public async Task<List<Product>> GetProductsAsync()
+        {
+            try
+            {
+                return await _context.Products.ToListAsync();
             }
             catch
             {
