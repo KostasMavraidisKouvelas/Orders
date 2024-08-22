@@ -10,7 +10,7 @@ namespace Orders.Api.Controllers
         private readonly IOperations _operations;
         public ProductsController(IOperations operations)
         {
-            operations = _operations;
+            _operations = operations;
         }
 
         [HttpGet]
