@@ -13,6 +13,8 @@ namespace Orders.DataAccess.Configuration
     {
         public void Configure(EntityTypeBuilder<Product> builder)
         {
+            builder.HasKey(c => c.Id);
+            builder.Property(c => c.Id).ValueGeneratedNever();
             builder.OwnsOne(c => c.Rating).ToJson();
         }
     }

@@ -38,7 +38,7 @@ namespace Orders.Application
                     }
                 }
 
-                var existingProducts = await _context.Products.Where(c=>products.Select(c=>c.Id).Contains(c.Id)).ToDictionaryAsync(c=>c.Id,c=>c);
+                var existingProducts = await _context.Products.Where(c => products.Select(c => c.Id).Contains(c.Id)).ToDictionaryAsync(c => c.Id, c => c);
 
                 foreach (var product in products)
                 {
