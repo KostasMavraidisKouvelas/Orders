@@ -5,10 +5,10 @@ namespace Orders.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class ProducstsController : Controller
+    public class ProductsController : Controller
     {
         private readonly IOperations _operations;
-        public ProducstsController(IOperations operations)
+        public ProductsController(IOperations operations)
         {
             operations = _operations;
         }
