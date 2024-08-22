@@ -21,7 +21,10 @@ namespace Orders.DataAccess
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
-        //public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<ProductSource> ProductSources { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<Payment> Payments { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
     }
 }
