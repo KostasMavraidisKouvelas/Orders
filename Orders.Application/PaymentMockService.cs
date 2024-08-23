@@ -7,7 +7,7 @@ using Orders.Models;
 
 namespace Orders.Application
 {
-    public class PaymentService : IPaymentServivce
+    public class PaymenMockService : IPaymentService
     {
         public async Task<bool> PayAsync(Order order)
         {

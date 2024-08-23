@@ -13,14 +13,30 @@ namespace Orders.Application
 
         public async Task  CreateOrderAsync(OrderDto orderDto)
         {
-/*            var products = _context.Products.Where(p => orderDto.ProductIds.Contains(p.Id)).ToList()*/; 
+            var products = _context.Products.Where(p => orderDto.ProductIds.Contains(p.Id)).ToList();
+
             var order = new Order
             {
                 IsDispatched = false,
-                Products = orderDto.Products,
+                Products = products,
                 UserId = orderDto.UserId
             };
             _context.Add(order);
+            await using var transaction = await _context.Database.BeginTransactionAsync();
+            {
+                try
+                {
+                    await _context.SaveChangesAsync();
+                    await _paymentService.PayAsync(order);
+                    transaction.Commit();
+                }
+                catch
+                {
+                    transaction.Rollback();
+                    throw;
+                }
+            }
+            
         }
     }
 }

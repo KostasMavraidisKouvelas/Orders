@@ -16,6 +16,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IOperations,Operations>();
+builder.Services.AddScoped<IPaymentService, PaymenMockService>();
 builder.Services.AddHttpClient();
 
 

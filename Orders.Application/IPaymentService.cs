@@ -8,7 +8,7 @@ using Orders.Models;
 
 namespace Orders.Application
 {
-    public interface IPaymentServivce
+    public interface IPaymentService
     {
          Task<bool> PayAsync(Order order);
     }

@@ -14,11 +14,13 @@ namespace Orders.Application
         private readonly OrdersDbContext _context;
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
-        public Operations(OrdersDbContext context, HttpClient httpClient, IConfiguration configuration)
+        private readonly IPaymentService _paymentService;
+        public Operations(OrdersDbContext context, HttpClient httpClient, IConfiguration configuration, IPaymentService paymentService)
         {
             _context = context;
             _httpClient = httpClient;
             _configuration = configuration;
+            _paymentService = paymentService;
         }
 
 
