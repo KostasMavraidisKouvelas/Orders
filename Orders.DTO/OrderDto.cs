@@ -4,7 +4,7 @@ namespace Orders.DTO
 {
     public class OrderDto 
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public List<int> ProductIds { get; set; }
     }
 }

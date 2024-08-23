@@ -15,7 +15,7 @@ builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddScoped<IOperations,Operations>();
+builder.Services.AddScoped<IOperations, Operations>();
 builder.Services.AddScoped<IPaymentService, PaymenMockService>();
 builder.Services.AddHttpClient();
 
@@ -44,6 +44,14 @@ builder.Services.AddAuthentication(options =>
             ValidateLifetime = true,
             RequireExpirationTime = false
         };
+    });
+builder.Services.AddAuthorization(options =>
+    {
+        options.AddPolicy("ViewOrders", policy => policy.RequireClaim("WebUser"));
+        options.AddPolicy("EditOrders", policy => policy.RequireClaim("WebUser"));
+        options.AddPolicy("ViewProducts", policy => policy.RequireClaim("WebUser","MobileUser"));
+        options.AddPolicy("EditProducts", policy => policy.RequireClaim("WebUser"));
+        options.AddPolicy("CreateOrder", policy => policy.RequireClaim("MobileUser"));
     });
 
 var app = builder.Build();

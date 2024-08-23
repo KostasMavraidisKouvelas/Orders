@@ -15,7 +15,7 @@ namespace Orders.Models
         public ICollection<Product> Products { get; set; }
         public Payment Payment { get; set; }
 
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
         public virtual User User { get; set; }
 
         public double TotalAmount

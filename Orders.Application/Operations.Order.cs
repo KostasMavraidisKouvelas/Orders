@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 using Orders.DTO;
 using Orders.Models;
 
@@ -36,7 +37,38 @@ namespace Orders.Application
                     throw;
                 }
             }
-            
+        }
+
+        public async Task<List<Order>> GetOrdersAsync()
+        {
+            try
+            {
+                return await _context.Orders.ToListAsync();
+            }
+            catch
+            {
+                throw; // Log exception
+            }
+        }
+
+        public async Task<Order> SetOrderDispatchedAsync(int orderId)
+        {
+            try
+            {
+                var order = await _context.Orders.SingleOrDefaultAsync(c => c.Id == orderId);
+                if (order == null)
+                {
+                    throw new Exception("Order not found");
+                }
+
+                order.IsDispatched = true;
+                await _context.SaveChangesAsync();
+                return order;
+            }
+            catch
+            {
+                throw; // Log exception
+            }
         }
     }
 }

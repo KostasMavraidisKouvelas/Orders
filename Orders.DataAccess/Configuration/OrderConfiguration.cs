@@ -15,7 +15,7 @@ namespace Orders.DataAccess.Configuration
         {
             builder.HasMany(c => c.Products)
                 .WithMany();
-            builder.HasOne(c => c.User).WithMany().HasForeignKey(c=>c.UserId);
+            builder.HasOne(c => c.User).WithMany().HasForeignKey(c => c.UserId);
         }
     }
 }

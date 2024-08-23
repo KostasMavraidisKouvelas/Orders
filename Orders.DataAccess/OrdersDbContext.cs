@@ -7,7 +7,7 @@ using Orders.Models;
 
 namespace Orders.DataAccess
 {
-    public class OrdersDbContext : IdentityDbContext
+    public class OrdersDbContext : IdentityDbContext<IdentityUser<Guid>, IdentityRole<Guid>, Guid, IdentityUserClaim<Guid>, IdentityUserRole<Guid>, IdentityUserLogin<Guid>, IdentityRoleClaim<Guid>, IdentityUserToken<Guid>>
     {
         public OrdersDbContext(DbContextOptions<OrdersDbContext> options) : base(options)
         {
@@ -16,6 +16,7 @@ namespace Orders.DataAccess
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<IdentityUserClaim<Guid>>().HasKey(x => x.Id);
 
             base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
