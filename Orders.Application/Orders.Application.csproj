@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Orders.DataAccess\Orders.DataAccess.csproj" />
+    <ProjectReference Include="..\Orders.DTO\Orders.DTO.csproj" />
   </ItemGroup>
 
 </Project>

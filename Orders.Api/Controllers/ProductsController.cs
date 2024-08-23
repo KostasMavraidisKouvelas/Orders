@@ -14,6 +14,14 @@ namespace Orders.Api.Controllers
         }
 
         [HttpGet]
+        [Route("Id")]
+        public async Task<IActionResult> GetProduct([FromRoute] int Id)
+        {
+            var products = await _operations.GetProduct(Id);
+            return Ok(products);
+        }
+
+        [HttpGet]
         public async Task<IActionResult> GetProducts()
         {
             var products = await _operations.GetProductsAsync();

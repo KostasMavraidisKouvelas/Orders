@@ -14,5 +14,22 @@ namespace Orders.Models
         public bool IsDispatched { get; set; }
         public ICollection<Product> Products { get; set; }
         public Payment Payment { get; set; }
+
+        public int UserId { get; set; }
+        public virtual User User { get; set; }
+
+        public double TotalAmount
+        {
+            get
+            {
+                // Compute the total amount based on the products
+                double total = 0;
+                foreach (var product in Products)
+                {
+                    total += product.Price;
+                }
+                return total;
+            }
+        }
     }
 }
