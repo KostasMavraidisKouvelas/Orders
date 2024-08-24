@@ -23,6 +23,22 @@ namespace Orders.Api.Controllers
             await _operations.CreateOrderAsync(order);
             return Ok();
         }
-        
+
+        [HttpGet]
+        [Authorize(Policy = "ViewOrders")]
+        public async Task<IActionResult> GetOrders()
+        {
+            var orders = await _operations.GetOrdersAsync();
+            return Ok(orders);
+        }
+
+        [HttpPut]
+        [Authorize(Policy = "EditOrders")]
+        public async Task<IActionResult> SetOrderDispatched([FromRoute] int orderId)
+        {
+            var order = await _operations.SetOrderDispatchedAsync(orderId);
+            return Ok(order);
+        }
+
     }
 }
