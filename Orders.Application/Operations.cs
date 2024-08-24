@@ -22,7 +22,5 @@ namespace Orders.Application
             _configuration = configuration;
             _paymentService = paymentService;
         }
-
-
     }
 }

@@ -1,11 +1,13 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using Orders.Api;
 using Orders.Application;
 using Orders.DataAccess;
+using Orders.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,8 +19,18 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IOperations, Operations>();
 builder.Services.AddScoped<IPaymentService, PaymenMockService>();
+builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddHttpClient();
 
+builder.Services.AddIdentityCore<User>(options =>
+    {
+        //Disable account confirmation.
+        options.SignIn.RequireConfirmedAccount = true;
+        options.Password.RequireNonAlphanumeric = false;
+        //options.SignIn.RequireConfirmedEmail = false;
+        //options.SignIn.RequireConfirmedPhoneNumber = false;
+    })
+    .AddEntityFrameworkStores<OrdersDbContext>();
 
 var connection = builder.Configuration                //#C
     .GetConnectionString("DefaultConnection");
