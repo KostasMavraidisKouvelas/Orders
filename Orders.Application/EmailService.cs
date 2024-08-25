@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Orders.Application
 {
-    public class EmailService
+    public class EmailService : IEmailService
     {
-        public void SendEmailWithAttachment(string recipient, string subject, string body, string attachmentPath)
+        public void SendEmail(string recipient, string subject, string body, string attachmentPath)
         {
             using (MailMessage mail = new MailMessage())
             {
