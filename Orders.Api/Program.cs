@@ -1,4 +1,5 @@
 using System.Text;
+using Hangfire;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -35,6 +36,17 @@ builder.Services.AddIdentityCore<User>(options =>
 
 var connection = builder.Configuration                //#C
     .GetConnectionString("DefaultConnection");
+var hangfireConnection = builder.Configuration.GetConnectionString("Hangfire");
+
+    //hanfire configuration
+builder.Services.AddHangfire(config
+    => config.SetDataCompatibilityLevel((CompatibilityLevel.Version_180))
+        .UseSimpleAssemblyNameTypeSerializer()
+        .UseRecommendedSerializerSettings()
+        .UseSqlServerStorage(hangfireConnection));
+
+builder.Services.AddHangfireServer();
+
 builder.Services.AddDbContext<OrdersDbContext>(
     options => options.UseSqlServer(connection, b => b.MigrationsAssembly("Orders.DataAccess"))); //#D
 builder.Services.Configure<JWTConfig>(configuration.GetSection("JWTConfig"));
@@ -82,4 +94,8 @@ app.UseAuthorization();
 
 app.MapControllers();
 
+app.UseHangfireDashboard();
+app.MapHangfireDashboard();
+
+RecurringJob.AddOrUpdate<IOperations>(c => c.ImportProductsAsync(), Cron.Daily);
 app.Run();
