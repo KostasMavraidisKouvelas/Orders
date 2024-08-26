@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,23 +10,33 @@ namespace Orders.Application
 {
     public class EmailService : IEmailService
     {
-        public void SendEmail(string recipient, string subject, string body, string attachmentPath)
+        public async Task SendEmailAsync(string recipient, string subject, string body, string attachmentPath)
         {
             using (MailMessage mail = new MailMessage())
             {
-                mail.From = new MailAddress("konstmavr@example.com");
+
+                mail.From = new MailAddress("konstmavrtest@gmail.com");
                 mail.To.Add(recipient);
                 mail.Subject = subject;
                 mail.Body = body;
 
-                Attachment attachment = new Attachment(attachmentPath);
-                mail.Attachments.Add(attachment);
-
-                using (SmtpClient smtp = new SmtpClient("smtp.mail.yahoo.com", 465))
+                if (attachmentPath != null)
                 {
-                    smtp.Credentials = new System.Net.NetworkCredential("your-email@example.com", "your-password");
-                    smtp.EnableSsl = true;
-                    smtp.Send(mail);
+                    Attachment attachment = new Attachment(attachmentPath);
+                    mail.Attachments.Add(attachment);
+                }
+
+                using (SmtpClient smtp =  new SmtpClient
+                {
+                    Host = "smtp.gmail.com",
+                    Port = 587,
+                    EnableSsl = true,
+                    DeliveryMethod = SmtpDeliveryMethod.Network,
+                    UseDefaultCredentials = false,
+                    Credentials = new System.Net.NetworkCredential("konstmavrtest@gmail.com", "mqtniosvadjjabvb")
+                })
+                {
+                    await smtp.SendMailAsync(mail);
                 }
             }
         }

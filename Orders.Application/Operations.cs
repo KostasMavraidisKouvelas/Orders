@@ -1,5 +1,6 @@
 ﻿using System.Net.Http;
 using System.Runtime.CompilerServices;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Protocols.OpenIdConnect;
@@ -15,12 +16,14 @@ namespace Orders.Application
         private readonly HttpClient _httpClient;
         private readonly IConfiguration _configuration;
         private readonly IPaymentService _paymentService;
-        public Operations(OrdersDbContext context, HttpClient httpClient, IConfiguration configuration, IPaymentService paymentService)
+        private readonly IEmailService _emailService;
+        public Operations(OrdersDbContext context, HttpClient httpClient, IConfiguration configuration, IPaymentService paymentService,IEmailService emailService,UserManager<User> userManager)
         {
             _context = context;
             _httpClient = httpClient;
             _configuration = configuration;
             _paymentService = paymentService;
+            _emailService = emailService;
         }
     }
 }

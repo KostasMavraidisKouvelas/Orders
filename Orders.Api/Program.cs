@@ -36,10 +36,10 @@ builder.Services.AddIdentityCore<User>(options =>
 
 var connection = builder.Configuration                //#C
     .GetConnectionString("DefaultConnection");
-var hangfireConnection = builder.Configuration.GetConnectionString("Hangfire");
+var hangfireConnection = builder.Configuration.GetConnectionString("HangfireConnection");
 
     //hanfire configuration
-builder.Services.AddHangfire(config
+builder.Services.AddHangfire(config 
     => config.SetDataCompatibilityLevel((CompatibilityLevel.Version_180))
         .UseSimpleAssemblyNameTypeSerializer()
         .UseRecommendedSerializerSettings()

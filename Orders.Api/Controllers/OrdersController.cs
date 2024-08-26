@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Orders.Application;
 using Orders.DTO;
+using System.Security.Claims;
 
 namespace Orders.Api.Controllers
 {
@@ -20,7 +21,8 @@ namespace Orders.Api.Controllers
         [Authorize(Policy = "CreateOrder")]
         public async Task<IActionResult> CreateOrder([FromBody] OrderDto order)
         {
-            await _operations.CreateOrderAsync(order);
+            var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
+            await _operations.CreateOrderAsync(order,userEmail);
             return Ok();
         }
 
@@ -28,6 +30,7 @@ namespace Orders.Api.Controllers
         [Authorize(Policy = "ViewOrders")]
         public async Task<IActionResult> GetOrders()
         {
+
             var orders = await _operations.GetOrdersAsync();
             return Ok(orders);
         }

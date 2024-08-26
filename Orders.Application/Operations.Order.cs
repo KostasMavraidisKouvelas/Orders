@@ -12,7 +12,7 @@ namespace Orders.Application
     public partial class Operations
     {
 
-        public async Task  CreateOrderAsync(OrderDto orderDto)
+        public async Task  CreateOrderAsync(OrderDto orderDto,string recipientEmail)
         {
             var products = _context.Products.Where(p => orderDto.ProductIds.Contains(p.Id)).ToList();
 
@@ -30,10 +30,13 @@ namespace Orders.Application
                     await _context.SaveChangesAsync();
                     await _paymentService.PayAsync(order);
                     transaction.Commit();
+                    await _emailService.SendEmailAsync(recipientEmail, "Order Confirmation", "Your order has been placed", null);
+
 
                 }
-                catch
+                catch(Exception e)
                 {
+                    Console.WriteLine(e.Message);
                     transaction.Rollback();
                     throw;
                 }

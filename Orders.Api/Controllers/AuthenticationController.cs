@@ -17,8 +17,17 @@ namespace Orders.Api.Controllers
         [Route("api/[controller]/Register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserDto registerDto)
         {
-            await _userService.Register(registerDto);
-            return Ok();
+            try
+            {
+                await _userService.Register(registerDto);
+                return Ok();
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return BadRequest(e.Message);
+               
+            }
         }
 
         [HttpPost]

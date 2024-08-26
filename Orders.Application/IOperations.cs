@@ -13,7 +13,7 @@ namespace Orders.Application
         public  Task ImportProductsAsync();
         public  Task<List<Product>> GetProductsAsync();
 
-        public Task  CreateOrderAsync(OrderDto order);
+        public Task  CreateOrderAsync(OrderDto order,string recipientEmail);
         public Task<Product> GetProduct(int id);
         public Task<List<Order>> GetOrdersAsync();
         public Task<Order> SetOrderDispatchedAsync(int orderId);

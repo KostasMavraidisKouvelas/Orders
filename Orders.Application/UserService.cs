@@ -71,12 +71,14 @@ namespace Orders.Application
           
 
                 var result = await _usersManager.CreateAsync(newUser, user.Password);
-                await _usersManager.AddClaimAsync(newUser, new Claim("mobileUser", "true"));
-
                 if (!result.Succeeded)
                 {
-                    throw new Exception("Failed to create user.");
+                    throw new Exception($"Failed to create user. {string.Join(", ", result.Errors)}");
                 }
+                await _usersManager.AddClaimAsync(newUser, new Claim("mobileUser", "true"));
+                await _usersManager.AddClaimAsync(newUser, new Claim("email", user.Email));
+
+
 
                 var secret = _configuration["JWTConfig:Secret"];
                 var claims = await _usersManager.GetClaimsAsync(newUser);
