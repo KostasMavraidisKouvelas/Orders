@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Orders.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Orders.Application
 {
     public interface IInvoiceGenerator
     {
-        public Task<byte[]> GenerateInvoice();
+        public Task<byte[]> GenerateInvoice(Payment payment);
     }
 }

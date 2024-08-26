@@ -17,5 +17,6 @@ namespace Orders.Application
         public Task<Product> GetProduct(int id);
         public Task<List<Order>> GetOrdersAsync();
         public Task<Order> SetOrderDispatchedAsync(int orderId);
+        public Task ResendInvoiceAsync(int orderId);
     }
 }

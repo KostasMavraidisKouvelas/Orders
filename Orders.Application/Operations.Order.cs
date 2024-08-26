@@ -34,10 +34,11 @@ namespace Orders.Application
                         OrderId = order.Id,
                         IsProcessed = true,
                     };
+                    _context.Add(payment);
                     await _context.SaveChangesAsync();
-                    transaction.Commit();
+                    await transaction.CommitAsync();
 
-                    var invoice = await _invoiceGenerator.GenerateInvoice();
+                    var invoice = await _invoiceGenerator.GenerateInvoice(payment);
                     await _emailService.SendEmailAsync(recipientEmail, "Order Confirmation", "Your order has been placed", invoice);
 
 
@@ -81,6 +82,14 @@ namespace Orders.Application
             {
                 throw; // Log exception
             }
+        }
+        public async Task ResendInvoiceAsync(int orderId)
+        {
+           var payment= _context.Payments.SingleOrDefault(o => o.OrderId==orderId);
+            var user = _context.Users.SingleOrDefault(u => u.Id == payment.Order.UserId);
+            var invoice = await _invoiceGenerator.GenerateInvoice(payment);
+            await _emailService.SendEmailAsync(user.Email, "Order Confirmation", "Your order has been placed", invoice);
+
         }
     }
 }

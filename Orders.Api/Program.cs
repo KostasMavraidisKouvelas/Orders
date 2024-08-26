@@ -78,6 +78,7 @@ builder.Services.AddAuthorization(options =>
         options.AddPolicy("ViewProducts", policy => policy.RequireClaim("WebUser","MobileUser"));
         options.AddPolicy("EditProducts", policy => policy.RequireClaim("WebUser"));
         options.AddPolicy("CreateOrder", policy => policy.RequireClaim("MobileUser"));
+        options.AddPolicy("ResendInvoice", policy => policy.RequireClaim("WebUser"));
     });
 
 var app = builder.Build();

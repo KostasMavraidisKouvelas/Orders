@@ -1,5 +1,6 @@
 ﻿using iTextSharp.text;
 using iTextSharp.text.pdf;
+using Orders.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,7 +12,7 @@ namespace Orders.Application
 {
     public class InvoiceGenerator : IInvoiceGenerator
     {
-        public async Task<byte[]> GenerateInvoice()
+        public async Task<byte[]> GenerateInvoice(Payment payment)
         {
             try
             {
