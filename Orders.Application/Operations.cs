@@ -17,13 +17,15 @@ namespace Orders.Application
         private readonly IConfiguration _configuration;
         private readonly IPaymentService _paymentService;
         private readonly IEmailService _emailService;
-        public Operations(OrdersDbContext context, HttpClient httpClient, IConfiguration configuration, IPaymentService paymentService,IEmailService emailService,UserManager<User> userManager)
+        private readonly IInvoiceGenerator _invoiceGenerator;
+        public Operations(OrdersDbContext context, HttpClient httpClient, IConfiguration configuration, IPaymentService paymentService,IEmailService emailService,UserManager<User> userManager,IInvoiceGenerator invoiceGenerator)
         {
             _context = context;
             _httpClient = httpClient;
             _configuration = configuration;
             _paymentService = paymentService;
             _emailService = emailService;
+            _invoiceGenerator = invoiceGenerator;
         }
     }
 }

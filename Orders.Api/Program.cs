@@ -22,6 +22,7 @@ builder.Services.AddScoped<IOperations, Operations>();
 builder.Services.AddScoped<IPaymentService, PaymenMockService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IEmailService, EmailService>();
+builder.Services.AddScoped<IInvoiceGenerator,InvoiceGenerator>();
 builder.Services.AddHttpClient();
 
 builder.Services.AddIdentityCore<User>(options =>

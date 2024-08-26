@@ -12,7 +12,7 @@ namespace Orders.Application
         public async Task<bool> PayAsync(Order order)
         {
             // Mock the payment process
-            await Task.Delay(0);
+            
             return true;
         }
     }

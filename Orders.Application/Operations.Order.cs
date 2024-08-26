@@ -29,8 +29,16 @@ namespace Orders.Application
                 {
                     await _context.SaveChangesAsync();
                     await _paymentService.PayAsync(order);
+                    var payment = new Payment
+                    {
+                        OrderId = order.Id,
+                        IsProcessed = true,
+                    };
+                    await _context.SaveChangesAsync();
                     transaction.Commit();
-                    await _emailService.SendEmailAsync(recipientEmail, "Order Confirmation", "Your order has been placed", null);
+
+                    var invoice = await _invoiceGenerator.GenerateInvoice();
+                    await _emailService.SendEmailAsync(recipientEmail, "Order Confirmation", "Your order has been placed", invoice);
 
 
                 }

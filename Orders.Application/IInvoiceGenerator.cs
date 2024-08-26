@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Orders.Application
 {
-    public interface IEmailService
+    public interface IInvoiceGenerator
     {
-        public Task SendEmailAsync(string recipient, string subject, string body, byte[] attachmentData);
+        public Task<byte[]> GenerateInvoice();
     }
 }
