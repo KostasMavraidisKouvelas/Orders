@@ -47,8 +47,7 @@ namespace Orders.Api.Controllers
         [Authorize(Policy = "ResendInvoice")]
         public async Task<IActionResult> ResendInvoice([FromRoute] int orderId)
         {
-            var userEmail = User.FindFirst(ClaimTypes.Email)?.Value;
-            await _operations.ResendInvoiceAsync(orderId, userEmail);
+            await _operations.ResendInvoiceAsync(orderId);
             return Ok();
         }
     }

@@ -11,12 +11,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.Models", "Orders.Mod
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{3BD39EEC-F389-46DF-8B10-6125F6A670E3}"
 	ProjectSection(SolutionItems) = preProject
+		..\..\..\Downloads\diagrma_orders.PNG = ..\..\..\Downloads\diagrma_orders.PNG
 		ReadME.md = ReadME.md
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.Api", "Orders.Api\Orders.Api.csproj", "{5C219908-AB6A-48CA-B733-27A3C39A3364}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Orders.DTO", "Orders.DTO\Orders.DTO.csproj", "{905F529F-3607-40C6-8480-EC24656FC79D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Orders.DTO", "Orders.DTO\Orders.DTO.csproj", "{905F529F-3607-40C6-8480-EC24656FC79D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
